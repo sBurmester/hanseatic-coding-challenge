@@ -13,7 +13,7 @@ class QuoteController extends AbstractController
     {
     }
 
-    #[Route('/api/quote', name: 'quote', methods: ['GET'])]
+    #[Route('/api/quote', name: 'api_quote_route', methods: ['GET'])]
     public function getQuotes(): JsonResponse
     {
         $quotes = $this->simpsonsQuoteService->getQuotes();
