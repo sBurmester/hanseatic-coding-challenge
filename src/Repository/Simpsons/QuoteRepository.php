@@ -32,10 +32,12 @@ readonly class QuoteRepository
     public function addQuote(Quote $quote): void
     {
         $this->entityManager->persist($quote);
+        $this->entityManager->flush();
     }
 
     public function removeQuote(Quote $quote): void
     {
         $this->entityManager->remove($quote);
+        $this->entityManager->flush();
     }
 }
