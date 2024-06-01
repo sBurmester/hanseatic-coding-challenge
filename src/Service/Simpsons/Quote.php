@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class Quote
 {
-    private const MAX_QUOTES = 4;
+    private const MAX_OLD_QUOTES = 4;
 
     public function __construct(
         readonly private QuoteRepository $quoteRepository,
@@ -26,7 +26,7 @@ class Quote
             $quote = $this->quoteApi->fetchNewQuote();
         }
 
-        if (count($currentQuotes) >= self::MAX_QUOTES) {
+        if (count($currentQuotes) > self::MAX_OLD_QUOTES) {
             $oldQuote = array_pop($currentQuotes);
             $this->quoteRepository->removeQuote($oldQuote);
         }
