@@ -22,4 +22,11 @@ class ApiTokenRepository extends ServiceEntityRepository
         $em->persist($apiToken);
         $em->flush();
     }
+
+    public function removeToken(ApiToken $apiToken): void
+    {
+        $em = $this->getEntityManager();
+        $em->remove($apiToken);
+        $em->flush();
+    }
 }

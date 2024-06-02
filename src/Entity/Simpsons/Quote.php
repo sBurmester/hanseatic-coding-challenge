@@ -2,6 +2,7 @@
 
 namespace App\Entity\Simpsons;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
@@ -40,7 +41,7 @@ class Quote
         return $this->quote;
     }
 
-    public function getAddedDate(): ?\DateTimeImmutable
+    public function getAddedDate(): DateTimeImmutable|null
     {
         return $this->addedDate;
     }
@@ -48,7 +49,7 @@ class Quote
     #[PrePersist]
     public function setAddedDateValue(): void {
         if (null === $this->addedDate) {
-            $this->addedDate = new \DateTimeImmutable();
+            $this->addedDate = new DateTimeImmutable();
         }
     }
 

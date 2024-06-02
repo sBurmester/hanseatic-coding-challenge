@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string|null $password = null;
 
 
-    public function __construct(?int $id, ?string $username, array $roles, ?string $password)
+    public function __construct(?int $id, string|null $username, array $roles, string|null $password)
     {
         $this->id = $id;
         $this->username = $username;
@@ -40,12 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string|null
     {
         return $this->username;
     }
 
-    public function setUsername(?string $username): static
+    public function setUsername(string|null $username): static
     {
         $this->username = $username;
 

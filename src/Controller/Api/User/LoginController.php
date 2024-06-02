@@ -21,7 +21,7 @@ class LoginController extends AbstractController
     }
 
     #[Route('/api/login', name: 'api_login', methods: ['POST'])]
-    public function index(#[CurrentUser] ?User $user): Response
+    public function index(#[CurrentUser] User|null $user): Response
     {
         if (null === $user) {
             return $this->json(['error' => 'missing credentials!'], Response::HTTP_UNAUTHORIZED);
@@ -30,9 +30,12 @@ class LoginController extends AbstractController
         $accessToken = null;
         $apiTokens = $this->apiTokenRepository->findBy(['user' => $user]);
         foreach ($apiTokens as $apiToken) {
-            if ($apiToken->isValid()) {
-                $accessToken = $apiToken->getAccessToken();
+            if(!$apiToken->isValid()) {
+                $this->apiTokenRepository->removeToken($apiToken);
+                continue;
             }
+
+            $accessToken = $apiToken->getAccessToken();
         }
 
         if (null === $accessToken) {

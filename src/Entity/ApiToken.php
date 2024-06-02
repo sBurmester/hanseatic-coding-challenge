@@ -18,17 +18,17 @@ use Doctrine\ORM\Mapping\PrePersist;
 class ApiToken
 {
     #[Id, GeneratedValue, Column]
-    private ?int $id = null;
+    private int|null $id = null;
 
     #[Column(length: 255)]
-    private ?string $token = null;
+    private string|null $token = null;
 
     #[Column]
-    private ?DateTimeImmutable $expiresAt = null;
+    private DateTimeImmutable|null $expiresAt = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'apiTokens')]
     #[JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private User|null $user = null;
 
     public function __construct(User $user, string|null $token)
     {
@@ -38,19 +38,19 @@ class ApiToken
         }
     }
 
-    public function getId(): ?int
+    public function getId(): int|null
     {
         return $this->id;
     }
 
-    public function setId(?int $id): static
+    public function setId(int $id): static
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getToken(): ?string
+    public function getToken(): string|null
     {
         return $this->token;
     }
@@ -62,7 +62,7 @@ class ApiToken
         return $this;
     }
 
-    public function getExpiresAt(): ?DateTimeImmutable
+    public function getExpiresAt(): DateTimeImmutable|null
     {
         return $this->expiresAt;
     }
@@ -74,12 +74,12 @@ class ApiToken
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User|null
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(User|null $user): static
     {
         $this->user = $user;
 
